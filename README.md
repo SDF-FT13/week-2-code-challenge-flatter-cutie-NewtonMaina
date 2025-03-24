@@ -23,12 +23,12 @@ json-server --watch db.json
 
 Test your server by visiting this route in the browser:
 
-[http://localhost:3000/characters](http://localhost:3000/characters)
+[https://flatacuties-back-end-sigma.vercel.app/characters](https://flatacuties-back-end-sigma.vercel.app/)
 
 Then, open the `index.html` file on your browser to run the application.
 
 Write your code in the `src/index.js` file. The base URL for your API will be
-[http://localhost:3000](http://localhost:3000).
+[https://flatacuties-back-end-sigma.vercel.app/](https://flatacuties-back-end-sigma.vercel.app/).
 
 ## Deliverables
 
