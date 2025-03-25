@@ -1,34 +1,45 @@
 // Your code here
-document.addEventListener("DOMContentLoaded", displayImage)
-function displayImage(){
-    return fetch("https://flatacuties-back-end-sigma.vercel.app/characters")
-    .then(resp => resp.json())
-    .then(data =>{
-        data.forEach(element => {
-            const menu=document.querySelector("#character-bar");
-            const spantag=document.createElement("span");
-            spantag.innerText=element.name;
-            spantag.addEventListener("click", ()=> displayDetails(element))
-            menu.appendChild(spantag);
+let baseURL = "https://flatter-cuties-back-end.vercel.app/characters";
 
-        })
+document.addEventListener("DOMContentLoaded", () => {
+const characterBar = document.getElementById("character-bar");
+const name = document.getElementById("name");
+const image = document.getElementById("image");
+const voteCount = document.getElementById("vote-count");
+const form = document.getElementById("votes-form");
+const resetBtn = document.getElementById("reset-btn");
 
-    });
+fetch(`${baseURL}`)
+.then(response => response.json())
+.then(characters => {
+characters.forEach(character => {
+const span = document.createElement("span");
+span.textContent = character.name;
+characterBar.appendChild(span);
+
+
+
+span.onclick = () => {
+name.textContent = character.name;
+image.src = character.image;
+image.alt = character.name;
+voteCount.textContent = character.votes;
+
+};
+});
+})
+.catch(err => console.log(err));
+
+
+form.onsubmit = (e) => {
+e.preventDefault();
+let votes = document.getElementById("votes").value;
+if (votes) {
+voteCount.textContent = Number(voteCount.textContent) + Number(votes);
 }
+form.reset();
+};
 
-function displayDetails(element){
-    document.querySelector("#name").innerText=element.name;
-    const images=document.querySelector("image")
-    images.src=element.image;
-    images.id=element.id;
-    images.alt=element.name;
-    document.querySelector("#vote-count").innerText=element.votes;
-}
 
-function handleClick(vote){
-    element.votes+=vote;
-    return fetch("https://flatacuties-back-end-sigma.vercel.app/characters/")
-    .then (resp => resp.json())
-    .then 
-}
-
+resetBtn.onclick = () => voteCount.textContent = 0;
+});
